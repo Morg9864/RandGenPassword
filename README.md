@@ -1,2 +1,2 @@
 # RandGenPassword
-A random password generator
+A simple random password generator
