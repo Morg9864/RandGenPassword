@@ -2,8 +2,6 @@ import { useState } from "react";
 
 export default function App() {
 
-  // We need to collect the length of the password, whether it should include numbers, symbols etc. And then generate a password
-
   const [password, setPassword] = useState("2OR0lx2wjW]5G8n[")
   const [passwordLength, setPasswordLength] = useState(16)
   const [includeSymbols, setIncludeSymbols] = useState(false)
@@ -12,7 +10,6 @@ export default function App() {
   const [includeUppercase, setIncludeUppercase] = useState(false)
 
   const handleGeneratePassword = () => {
-    // 1. Create a list of characters that can be used in the password
     const lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz"
     const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     const numberCharacters = "0123456789"
@@ -36,35 +33,27 @@ export default function App() {
       validChars += symbolCharacters
     }
 
-    // Verify that at least one character type is selected
     if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSymbols) {
       alert("You must select at least one character type")
       return
     }
 
-    // 2. Generate a password of the desired length
     let generatedPassword = ""
     for (let i = 0; i < passwordLength; i++) {
       const index = Math.floor(Math.random() * validChars.length)
       generatedPassword += validChars[index]
     }
 
-    // 3. Update the password state
     setPassword(generatedPassword)
   }
 
-  // 4. Copy the password to the clipboard
-  // 5. Reset the password generator
-
   const handleCopyPassword = () => {
-    // Copy the password to the clipboard
     navigator.clipboard.writeText(password)
       .then(() => alert("Texte copié!"))
       .catch(err => console.error('Erreur lors de la copie : ', err));
   }
 
   const handleResetPassword = () => {
-    // Reset the password generator
     setPassword("2OR0lx2wjW]5G8n[")
   }
 
@@ -93,7 +82,6 @@ export default function App() {
         <div className="grid grid-cols-2 gap-4 mt-6">
           <div className="flex justify-center mt-6">
             <div className="flex flex-col">
-              {/*Create a include symbols checkbox that is updating the usestate includeSymbols */}
               <label className="text-center font-bold">Include Symbols</label>
               <input
                 className="w-48 h-5 px-3 py-2 border border-gray-300 rounded mt-1"
@@ -167,7 +155,7 @@ export default function App() {
         <div className="grid grid-cols-2 gap-4 mt-6">
           <div className="flex justify-center mt-6">
             <button className="px-4 py-2 bg-violet-500 text-white font-semibold rounded"
-            onClick={handleCopyPassword}
+              onClick={handleCopyPassword}
             >
               Copy Password
             </button>
@@ -175,7 +163,7 @@ export default function App() {
 
           <div className="flex justify-center mt-6">
             <button className="px-4 py-2 bg-violet-500 text-white font-semibold rounded"
-            onClick={handleResetPassword}
+              onClick={handleResetPassword}
             >
               Reset Password
             </button>
